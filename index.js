@@ -1,10 +1,11 @@
 import React from 'react';
 import { AppRegistry, View } from 'react-native';
-import FirstLayer from './src/components/FirstLayer';
+import Page from './src/components/Page';
+
 
 const App = () => (
 	<View style={{ flex: 1 }}>
-		<FirstLayer />
+		<Page />	
 	</View>
 );
 

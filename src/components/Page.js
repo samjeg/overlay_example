@@ -1,40 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import FirstLayer from './FirstLayer';
 import SecondLayer from './SecondLayer';
 import FirstCircleLayer from './FirstCircleLayer';
 import SecondCircleLayer from './SecondCircleLayer';
 
-// const fstcrclelv = StyleSheet.flatten(FirstCircleLayer).elevation;
-// const scdcrclelv = StyleSheet.flatten(.style).elevation;
+const Page = () => {
+	return (
+		<View>
+			<FirstLayer />
+			<SecondLayer />
+			<FirstCircleLayer onPress={() => switchCircle()} />
+			<SecondCircleLayer />
+		</View>
+	);
+};
 
-class Page extends Component {
+const switchCircle = () => {
+	const elevation = StyleSheet.flatten(this.props.style).elevation;
 
-
-	// switchCircle() {
-	// 	if (fstcrclelv > scdcrclelv) {
-	// 		console.log('first over second');
-	// 	} else {
-	// 		console.log('second over first');	
-	// 	}
-	// }
-
-	renderAlbums() {
-		
+	if (elevation >= 30) {
+		return 30;
 	}
+	return 45;
+};
 
-	render() {
-		console.log(SecondCircleLayer.default.style);
-        // this.switchCircle();
-		return (
-			<View>
-				<FirstLayer />
-				<SecondLayer />
-				<FirstCircleLayer />
-				<SecondCircleLayer />
-			</View>
-		);
-	}
-}
+// const switchSecondCircle = (props) => {
+// 	const elevation = StyleSheet.flatten(props.style).elevation;
+
+// 	if (elevation === 40) {
+// 		return 30;
+// 	}
+// 	return 40;
+// };
 
 export default Page;

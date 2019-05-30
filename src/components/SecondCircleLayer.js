@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { vw, vh } from 'react-native-expo-viewport-units';
 
-class SecondCircleLayer extends Component { 
+const SecondCircleLayer = () => { 
+	const { secondCircleLayerStyle } = styles;
 
-	render() {
-		return (
-			<TouchableOpacity style={styles.secondCircleLayerStyle} />
-		);
-	}
-}
+	return (
+		<TouchableOpacity style={secondCircleLayerStyle} />
+	);
+};
+
 
 const styles = {
 	secondCircleLayerStyle: {
@@ -20,8 +20,8 @@ const styles = {
         width: vw(30),
         marginHorizontal: vw(35),
         marginVertical: (vh(100) - vw(30)) / 2,
-        // zIndex: 10,
         elevation: 40,
+        // zIndex: 10,
 		// justifyContent: 'center',
 		// alignItems: 'center',
 	},

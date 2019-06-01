@@ -1,37 +1,101 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 import FirstLayer from './FirstLayer';
 import SecondLayer from './SecondLayer';
 import FirstCircleLayer from './FirstCircleLayer';
 import SecondCircleLayer from './SecondCircleLayer';
 
-const Page = () => {
-	return (
-		<View>
-			<FirstLayer />
-			<SecondLayer />
-			<FirstCircleLayer onPress={() => switchCircle()} />
-			<SecondCircleLayer />
-		</View>
-	);
-};
-
-const switchCircle = () => {
-	const elevation = StyleSheet.flatten(this.props.style).elevation;
-
-	if (elevation >= 30) {
-		return 30;
+class Page extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { 
+			firstCircleElevation: 30,
+			secondCircleElevation: 50,
+			firstCircleClicked: false,
+			secondCircleClicked: false,
+			firstCircleLoaded: false,
+			secondCircleLoaded: false
+		};
 	}
-	return 45;
-};
+	render() {
+		return (
+			<View>
+				<FirstLayer />
+				<SecondLayer />
+				<FirstCircleLayer 
+					onClick={currentElevation => {
+						if (currentElevation < 50) {
+							this.setState({ 
+								firstCircleElevation: 50,
+								firstCircleClicked: true, 
+								secondCircleLoaded: false
+							});
+						}
+					}}
+					onLoad={currentElevation => {
+						if (currentElevation >= 50) {
+							this.setState({ 
+								firstCircleElevation: 30,
+								firstCircleClicked: false,
+								firstCircleLoaded: true 
+							});
+						}
+					}}
+					data={
+						this
+						.state
+						.secondCircleElevation
+					}
+					secondCircleClicked={
+						this
+						.state
+						.secondCircleClicked
+					}
+					firstCircleLoaded={
+						this
+						.state
+						.firstCircleLoaded
+					}					                                                         
+				/>
+				<SecondCircleLayer 
+					onClick={currentElevation => {
+						if (currentElevation < 50) {
+							this.setState({ 
+								secondCircleElevation: 50,
+								secondCircleClicked: true,
+								firstCircleLoaded: false
+							});
+						}
+					}}
+					onLoad={currentElevation => {
+						if (currentElevation >= 50) {
+							this.setState({ 
+								secondCircleElevation: 30,
+								secondCircleClicked: false,
+								secondCircleLoaded: true
+							});
+						}
+					}}
+					data={
+						this
+						.state
+						.firstCircleElevation
+					}
+					firstCircleClicked={
+						this
+						.state
+						.firstCircleClicked
+					}
+					secondCircleLoaded={
+						this
+						.state
+						.secondCircleLoaded
+					}
+				/>
+			</View>
+		);
+	}
+}
 
-// const switchSecondCircle = (props) => {
-// 	const elevation = StyleSheet.flatten(props.style).elevation;
-
-// 	if (elevation === 40) {
-// 		return 30;
-// 	}
-// 	return 40;
-// };
 
 export default Page;

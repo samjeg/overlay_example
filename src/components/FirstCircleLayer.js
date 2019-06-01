@@ -1,26 +1,78 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { vw, vh } from 'react-native-expo-viewport-units';
+// import SecondCircleLayer from './SecondCircleLayer';
 
 
 class FirstCircleLayer extends Component {
+
 	constructor(props) {
 		super(props);
-		this.state = { firstCircleStyle: styles(30).firstCircleLayerStyle };
+		this.state = { 
+			firstCircleStyle: styles(30).firstCircleLayerStyle
+		};
+		this.putBehind = this.putBehind.bind(this);
 	}
 
-	setElevation() {
-		const elevation = StyleSheet.flatten(this.state.firstCircleStyle).elevation;
+	componentDidUpdate() {
+		const firstCircleElevation = StyleSheet.flatten(this.state.firstCircleStyle).elevation;
+		const firstCircleLoaded = this.props.firstCircleLoaded;
+		const secondCircleElevation = this.props.data;
+		const secondCircleClicked = this.props.secondCircleClicked;
+		console.log(
+			'updated first circle ' + 
+			firstCircleElevation + 
+			' ' + 
+			secondCircleElevation + 
+			' ' + 
+			secondCircleClicked
+		);
 
-		if (elevation >= 30) {
-			this.setState({ firstCircleStyle: styles(30).firstCircleLayerStyle });
+		if (secondCircleClicked && !firstCircleLoaded) {
+			if (secondCircleElevation >= 50) {
+				this.putBehind();
+				this.props.onLoad(firstCircleElevation);
+			}
 		}
-		this.setState({ firstCircleStyle: styles(50).firstCircleLayerStyle });
+	}
+
+
+	setElevation() {
+		const firstCircleElevation = StyleSheet.flatten(this.state.firstCircleStyle).elevation;
+		const secondCircleElevation = this.props.data;
+		console.log(
+			'first circle elevation ' +
+			firstCircleElevation +
+			' ' +
+			secondCircleElevation  
+		);
+
+		if (firstCircleElevation < 50 && secondCircleElevation >= 50) {
+			this.putOnTop();
+			this.props.onClick(firstCircleElevation);
+		} 
+	}
+
+	putOnTop() {
+		console.log('putting first circle on top');
+		this.setState({ 
+			firstCircleStyle: styles(50).firstCircleLayerStyle 
+		});
+	}
+
+	putBehind() {
+		console.log('putting first circle behind');
+		this.setState({ 
+			firstCircleStyle: styles(30).firstCircleLayerStyle 
+		});
 	}
 
 	render() {
 		return (
-			<TouchableOpacity onPress={() => this.setElevation()} style={this.state.firstCircleStyle} />
+			<TouchableOpacity 
+				onPress={() => this.setElevation()} 
+				style={this.state.firstCircleStyle}                                               
+			/>
 		);
 	}
 }

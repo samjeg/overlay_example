@@ -8,7 +8,7 @@ class FirstCircleLayer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			firstCircleStyle: styles(this.props.firstCircleElevation).firstCircleLayerStyle,
+			firstCircleStyle: styles(this.props.firstCircleAlterElevation).firstCircleLayerStyle,
 		};
 	}
 
@@ -74,31 +74,26 @@ class FirstCircleLayer extends Component {
 
 
 	setElevation() {
-		const firstCircleElevation = StyleSheet.flatten(this.state.firstCircleStyle).elevation;
-		const secondCircleElevation = this.props.secondCircleElevation;
-		// const firstCircleAtBack = this.props.firstCircleAtBack;
-		// const secondCircleAtFront = this.props.secondCircleAtFront;
-		// const secondCircleClicked = this.props.secondCircleClicked;
-		// const firstCircleClicked = this.props.firstCircleClicked;
-		// const secondCircleClickedPrev = prevProps.secondCircleClicked;
+		// const firstCircleElevation = StyleSheet.flatten(this.state.firstCircleStyle).elevation;
+		// const secondCircleElevation = this.props.secondCircleAlterElevation;
+		// // const firstCircleAtBack = this.props.firstCircleAtBack;
+		// // const secondCircleAtFront = this.props.secondCircleAtFront;
+		// // const secondCircleClicked = this.props.secondCircleClicked;
+		// // const firstCircleClicked = this.props.firstCircleClicked;
+		// // const secondCircleClickedPrev = prevProps.secondCircleClicked;
 
-		console.log(
-			'set elevation first circle ' +
-			firstCircleElevation +
-			' ' +
-			secondCircleElevation
-		);
-		// 	firstCircleClicked +
-		// 	' ' +
-		// 	secondCircleClicked 
-			// ' ' +
-			// secondCircleClickedPrev
+		// // console.log('set elevation first circle');
+		// // 	firstCircleClicked +
+		// // 	' ' +
+		// // 	secondCircleClicked 
+		// 	// ' ' +
+		// 	// secondCircleClickedPrev
 
-		// if (firstCircleAtBack && secondCircleAtFront) {
-			if (firstCircleElevation < 50 && secondCircleElevation >= 50) {
-				// this.putOnTop();
-				this.props.onClick();
-			}
+		// // if (firstCircleAtBack && secondCircleAtFront) {
+		// 	if (firstCircleElevation < 50 && secondCircleElevation >= 50) {
+		// 		// this.putOnTop();
+		// 		this.props.onClick(firstCircleElevation);
+		// 	}
 		// }
 	}
 
@@ -118,8 +113,7 @@ class FirstCircleLayer extends Component {
 
 	render() {
 		return (
-			<TouchableOpacity
-				onPress={() => this.setElevation()} 
+			<View
 				style={this.state.firstCircleStyle}                                               
 			/>
 		);

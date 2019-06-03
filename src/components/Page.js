@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
-import FirstLayer from './FirstLayer';
-import SecondLayer from './SecondLayer';
+import { View } from 'react-native';
 import FirstCircleLayer from './FirstCircleLayer';
 import SecondCircleLayer from './SecondCircleLayer';
 import FirstCircleAlter from './FirstCircleAlter';
@@ -13,11 +11,9 @@ class Page extends Component {
 		this.state = { 
 			renderAlternate: false,
 			firstCircleElevation: 30,
-			firstCircleClicked: false,
 			secondCircleElevation: 50,
 			firstCircleAlterElevation: 50,
-			secondCircleAlterElevation: 30,
-			secondCircleAlterClicked: false,
+			secondCircleAlterElevation: 30
 		};
 	}
 
@@ -95,6 +91,5 @@ class Page extends Component {
 		);
 	}
 }
-
 
 export default Page;
